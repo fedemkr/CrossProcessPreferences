@@ -3,13 +3,13 @@ using Android.Content;
 
 namespace CrossProcessPreferences
 {
-    public class CrossProcessPreferences
+    public class CrossProcessSharedPreferences
     {
         private readonly Context context;
 
         private readonly string preferenceFileName;
 
-        public CrossProcessPreferences(Context context, string preferenceFileName)
+        public CrossProcessSharedPreferences(Context context, string preferenceFileName)
         {
             this.context = context;
             this.preferenceFileName = preferenceFileName;

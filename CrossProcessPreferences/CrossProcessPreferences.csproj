@@ -49,7 +49,7 @@
     <Compile Include="PreferenceProvider.cs" />
     <Compile Include="IPrefImpl.cs" />
     <Compile Include="PreferenceImpl.cs" />
-    <Compile Include="CrossProcessPreferences.cs" />
+    <Compile Include="CrossProcessSharedPreferences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
