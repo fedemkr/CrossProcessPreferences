@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Android.Content;
 using Android.Database;
 using Android.Text;
@@ -48,40 +49,50 @@ namespace CrossProcessPreferences
         {
             MatrixCursor cursor = null;
             PrefModel model = GetPrefModelByUri(uri);
-            switch (sUriMatcher.Match(uri))
+
+            try
             {
-                case PREF_BOOLEAN:
-                    if (GetDPreference(model.Name).HasKey(model.Key))
-                    {
-                        cursor = PreferenceToCursor(new Java.Lang.Boolean((GetDPreference(model.Name).GetPrefBoolean(model.Key, false))));
-                    }
-                    break;
-                case PREF_STRING:
-                    if (GetDPreference(model.Name).HasKey(model.Key))
-                    {
-                        cursor = PreferenceToCursor((Java.Lang.String)(GetDPreference(model.Name).GetPrefString(model.Key, "")));
-                    }
-                    break;
-                case PREF_INT:
-                    if (GetDPreference(model.Name).HasKey(model.Key))
-                    {
-                        cursor = PreferenceToCursor((Java.Lang.Integer)(GetDPreference(model.Name).GetPrefInt(model.Key, -1)));
-                    }
-                    break;
-                case PREF_LONG:
-                    if (GetDPreference(model.Name).HasKey(model.Key))
-                    {
-                        cursor = PreferenceToCursor((Java.Lang.Long)(GetDPreference(model.Name).GetPrefLong(model.Key, -1)));
-                    }
-                    break;
-                case PREF_DATETIME:
-                    if (GetDPreference(model.Name).HasKey(model.Key))
-                    {
-                        cursor = PreferenceToCursor((Java.Lang.Long)(GetDPreference(model.Name).GetPrefLong(model.Key, -1)));
-                    }
-                    break;
+                switch (sUriMatcher.Match(uri))
+                {
+                    case PREF_BOOLEAN:
+                        if (GetDPreference(model.Name).HasKey(model.Key))
+                        {
+                            cursor = PreferenceToCursor(new Java.Lang.Boolean((GetDPreference(model.Name).GetPrefBoolean(model.Key, false))));
+                        }
+                        break;
+                    case PREF_STRING:
+                        if (GetDPreference(model.Name).HasKey(model.Key))
+                        {
+                            cursor = PreferenceToCursor(new Java.Lang.String((GetDPreference(model.Name).GetPrefString(model.Key, ""))));
+                        }
+                        break;
+                    case PREF_INT:
+                        if (GetDPreference(model.Name).HasKey(model.Key))
+                        {
+                            cursor = PreferenceToCursor((Java.Lang.Integer)(GetDPreference(model.Name).GetPrefInt(model.Key, -1)));
+                        }
+                        break;
+                    case PREF_LONG:
+                        if (GetDPreference(model.Name).HasKey(model.Key))
+                        {
+                            cursor = PreferenceToCursor((Java.Lang.Long)(GetDPreference(model.Name).GetPrefLong(model.Key, -1)));
+                        }
+                        break;
+                    case PREF_DATETIME:
+                        if (GetDPreference(model.Name).HasKey(model.Key))
+                        {
+                            cursor = PreferenceToCursor((Java.Lang.Long)(GetDPreference(model.Name).GetPrefLong(model.Key, -1)));
+                        }
+                        break;
+                }
+                return cursor;
             }
-            return cursor;
+            catch (Exception exQuery)
+            {
+                for (int i = 0; i < 10; i++)
+                    Debug.WriteLine($"PreferenceProvider Query Exception: {exQuery.Message} ON pref: {sUriMatcher.Match(uri)}\nKey: {model.Key}");
+                throw exQuery;
+            }
         }
 
         public override string GetType(Android.Net.Uri uri)
