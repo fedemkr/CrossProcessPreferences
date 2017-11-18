@@ -26,3 +26,4 @@ It supports int, long, bool (also if they are nullable), string and DateTime (it
 Roadmap:
 
 - Add support for decimal, double
+- Create NuGet pacakge
