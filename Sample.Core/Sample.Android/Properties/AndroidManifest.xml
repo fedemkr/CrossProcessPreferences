@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.Sample.Core">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="Sample.Core.Android">
+        <provider android:name="crossprocesspreferences.PreferenceProvider" android:authorities="crossprocesspreferences.PreferenceProvider" android:exported="false" />
+    </application>
+</manifest>
