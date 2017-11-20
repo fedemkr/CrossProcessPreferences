@@ -2,6 +2,11 @@
 
 [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences.html)'s MULTI_PROCESS_MODE has been deprecated in API 23 for being not so reliable. Thus if you want to use SharedPreferences in multiple processes then you can use this.
 
+## NuGet
+[CrossProcessPreferences](https://www.nuget.org/packages/CrossProcessPreferences)  [![NuGet](https://img.shields.io/nuget/v/CrossProcessPreferences.svg?label=NuGet)](https://www.nuget.org/packages/CrossProcessPreferences)
+
+## How to use it
+
 It has an easy API that is similar to the one in SharedPreferences and works using a ContentProvider that must be registered in the AndroidManifest:
 
 ```xml
@@ -23,7 +28,7 @@ preferences.Remove("myKey");
 
 It supports int, long, bool (also if they are nullable), string and DateTime (it will store it as UTC).
 
-Roadmap:
+## Roadmap
 
 - Add support for decimal, double
 - Create NuGet pacakge
